@@ -10,7 +10,7 @@ namespace SocialNetwork.Tests
         public void SubtractionMustReturnNotNullValue()
         {
             FriendRepository friendRepository  = new FriendRepository();
-            Assert.That(friendRepository.FindAllByUserId(0).Count()!=0);
+            Assert.That(friendRepository.FindAllByUserId(1).Count()!=0);
         }
     }
 }
