@@ -1,47 +1,49 @@
-﻿using SocialNetwork.BLL.Models;
+﻿using SocialNetwork.BLL.Exceptions;
+using SocialNetwork.BLL.Models;
 using SocialNetwork.BLL.Services;
+using SocialNetwork.PLL.Views;
 
 namespace SocialNetwork
 {
     class Program
     {
-        public static UserService userService = new UserService();
-        static void Main()
+        static MessageService messageService;
+        static FriendService friendService;
+        static UserService userService;
+        public static MainView mainView;
+        public static RegistrationView registrationView;
+        public static AuthenticationView authenticationView;
+        public static UserMenuView userMenuView;
+        public static UserInfoView userInfoView;
+        public static UserDataUpdateView userDataUpdateView;
+        public static MessageSendingView messageSendingView;
+        public static UserIncomingMessageView userIncomingMessageView;
+        public static UserOutcomingMessageView userOutcomingMessageView;
+        public static UserFriends userFriends;
+        public static AddFriendView addFriendView;
+
+
+        static void Main(string[] args)
         {
-            Console.WriteLine("Добро пожаловать в социальную сеть.");
+            userService = new UserService();
+            messageService = new MessageService();
+            friendService = new FriendService();
+
+            mainView = new MainView();
+            registrationView = new RegistrationView(userService);
+            authenticationView = new AuthenticationView(userService);
+            userMenuView = new UserMenuView(userService);
+            userInfoView = new UserInfoView();
+            userDataUpdateView = new UserDataUpdateView(userService);
+            messageSendingView = new MessageSendingView(messageService, userService);
+            userIncomingMessageView = new UserIncomingMessageView();
+            userOutcomingMessageView = new UserOutcomingMessageView();
+            userFriends = new UserFriends();
+            addFriendView = new AddFriendView(friendService, userService);
 
             while (true)
             {
-                Console.WriteLine("Для регистрации пользователя введите имя пользователя:");
-                string firstName = Console.ReadLine();
-                Console.Write("фамилия:");
-                string lastName = Console.ReadLine();
-                Console.Write("пароль:");
-                string password = Console.ReadLine();
-                Console.Write("почтовый адрес:");
-                string eMail = Console.ReadLine();
-
-                UserRegistrationData userRegistrationData = new UserRegistrationData()
-                {
-                    Firstname = firstName,
-                    Lastname = lastName,
-                    Password = password,
-                    Email = eMail,
-                };
-                try
-                {
-                    userService.Register(userRegistrationData);
-                    Console.WriteLine("Регистрация произошла успешно!");
-                }
-                catch (ArgumentNullException)
-                {
-                    Console.WriteLine("Введите корректное значение!");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Произошла ошибка при регистрации");
-                }
-                Console.ReadLine();
+                mainView.Show();
             }
         }
     }

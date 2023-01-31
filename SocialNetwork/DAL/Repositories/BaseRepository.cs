@@ -1,7 +1,6 @@
 ﻿
-
 using Dapper;
-using Devart.Data.SQLite;
+using Microsoft.Data.Sqlite;
 using System.Data;
 
 namespace SocialNetwork.DAL.Repositories
@@ -37,7 +36,7 @@ namespace SocialNetwork.DAL.Repositories
 
         private IDbConnection CreateConnection()
         {
-            return new SQLiteConnection("Data Source = DAL/DB/social_network_bd.db; ");
+            return new SqliteConnection("Data Source = DAL/DB/social_network_bd.db; ");
         }
     }
 }
