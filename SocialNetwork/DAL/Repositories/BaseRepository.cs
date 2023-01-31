@@ -1,11 +1,8 @@
-﻿using Dapper;
+﻿
+
+using Dapper;
 using Devart.Data.SQLite;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SocialNetwork.DAL.Repositories
 {
